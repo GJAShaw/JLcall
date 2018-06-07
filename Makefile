@@ -60,7 +60,7 @@ all: $(appclass) $(dll)
 # --------------------------------------
 # .PHONY
 # --------------------------------------
-.PHONY: .ONESHELL all appclass clean tester testrun
+.PHONY: .ONESHELL all appclass clean testclass testrun
 
 # --------------------------------------
 # class compilation
@@ -92,7 +92,7 @@ appclass: $(appclass)
 # --------------------------------------
 # JLtest class compilation
 # --------------------------------------
-tester: $(testclass)
+testclass: $(testclass)
 
 # --------------------------------------
 # JLtest run
