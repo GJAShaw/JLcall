@@ -72,10 +72,9 @@ $(release_dir)/%.class: $(src_dir)/%.java
 # --------------------------------------
 # JNI header creation
 # --------------------------------------
-$(header): $(class)
+$(header): $(appclass)
 	@echo "Creating header $@"
 	@$(JAVAH) -cp $(release_dir) -d $(include_dir) $(package_name).$(class_name)
-
 
 # --------------------------------------
 # dll compilation
@@ -106,12 +105,8 @@ testrun:
 # --------------------------------------
 clean:
 	@echo "Deleting all targets and intermediate files"
-	-@$(RM) $(release_dir)/$(package_path)/$(class_name).class
-	-@$(RM) $(release_dir)/$(dll_filename)
-	-@$(RM) $(include_dir)/$(hdr_file)
-	-@$(RM) $(release_dir)/$(test_class).class
+	-@$(RM) $(appclass) $(dll) $(header) $(testclass)
 
 # ------------------------------------------------------------------------------
 # EOF
 # ------------------------------------------------------------------------------
-
