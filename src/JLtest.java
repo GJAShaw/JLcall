@@ -3,8 +3,6 @@
  * Calls functions from the JLcall class
  */
 
-//import com.avalokita.jlcall.JLcall;
-
 class JLtest {
 
 	public static void main(String[] args) {

@@ -35,12 +35,13 @@ src_dir := ./src
 test_class := JLtest
 
 # RM
-RM = rm -fR
+RM := rm -fR
 
 # file target name variables
-class := $(release_dir)/$(package_path)/$(class_name).class
+appclass := $(release_dir)/$(package_path)/$(class_name).class
 dll := $(release_dir)/$(dll_filename)
 header := $(include_dir)/$(hdr_file)
+testclass := $(release_dir)/$(test_class).class
 
 # ------------------------------------------------------------------------------
 # rules
@@ -49,7 +50,7 @@ header := $(include_dir)/$(hdr_file)
 # --------------------------------------
 # all
 # --------------------------------------
-all: $(class) $(dll)
+all: $(appclass) $(dll)
 
 # --------------------------------------
 # .ONESHELL
@@ -66,7 +67,7 @@ all: $(class) $(dll)
 # --------------------------------------
 $(release_dir)/%.class: $(src_dir)/%.java
 	@echo "Compiling class $@"
-	@$(JAVAC) -d $(release_dir) "$<"
+	@$(JAVAC) -cp $(release_dir) -d $(release_dir) "$<"
 
 # --------------------------------------
 # JNI header creation
@@ -74,6 +75,7 @@ $(release_dir)/%.class: $(src_dir)/%.java
 $(header): $(class)
 	@echo "Creating header $@"
 	@$(JAVAH) -cp $(release_dir) -d $(include_dir) $(package_name).$(class_name)
+
 
 # --------------------------------------
 # dll compilation
@@ -84,13 +86,14 @@ $(dll): $(csrc_dir)/$(csrc_file) $(header)
 		-I"$(include_dir)" -fPIC -shared -o "$@" "$<"
 
 # --------------------------------------
+# JLcall class compilation
+# --------------------------------------
+appclass: $(appclass)
+
+# --------------------------------------
 # JLtest class compilation
 # --------------------------------------
-tester: $(release_dir)/$(test_class).class
-
-$(release_dir)/$(test_class).class: $(test_class).java
-	@echo "Compiling tester class $@"
-	@$(JAVAC) -cp $(release_dir) -d $(release_dir) $(test_class).java
+tester: $(testclass)
 
 # --------------------------------------
 # JLtest run
