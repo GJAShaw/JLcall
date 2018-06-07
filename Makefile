@@ -60,7 +60,7 @@ all: $(appclass) $(dll)
 # --------------------------------------
 # .PHONY
 # --------------------------------------
-.PHONY: .ONESHELL all clean tester testrun
+.PHONY: .ONESHELL all appclass clean tester testrun
 
 # --------------------------------------
 # class compilation
