@@ -8,7 +8,7 @@ This is a personal self-teaching project on the topics of
 * GitHub
 * GNU Make
 
-As such, it does not aim to be ground-breaking in its material, strictly object-oriented in its concepts, or enterprise-level in its methods, but it is certainly a lot of fun for me.
+As such, it does not aim to be ground-breaking in its material, strictly object-oriented in its design, or enterprise-level in its methods, but it is certainly a lot of fun for me.
 
 # Executables
 * JLcall.class - a collection of static native methods designed to invoke system calls. Not very object-oriented, unless you pretend that it is modelling "the set of system call functions".
