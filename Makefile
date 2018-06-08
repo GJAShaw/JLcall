@@ -28,7 +28,8 @@ csrc_file := $(subst .h,.c,$(hdr_file))
 JAVA := java
 JAVAC := javac
 JAVAH := javah
-JAVA_HOME := /usr/local/jdk1.8.0_152
+JAVA_HOME := /usr/local/jdk
+javac_opts := -g
 src_dir := ./src
 
 # test class
@@ -67,7 +68,7 @@ all: $(appclass) $(dll)
 # --------------------------------------
 $(release_dir)/%.class: $(src_dir)/%.java
 	@echo "Compiling class $@"
-	@$(JAVAC) -cp $(release_dir) -d $(release_dir) "$<"
+	@$(JAVAC) $(javac_opts) -cp $(release_dir) -d $(release_dir) "$<"
 
 # --------------------------------------
 # JNI header creation
