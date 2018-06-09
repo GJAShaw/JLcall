@@ -28,7 +28,8 @@ csrc_file := $(subst .h,.c,$(hdr_file))
 JAVA := java
 JAVAC := javac
 JAVAH := javah
-JAVA_HOME := /usr/local/jdk1.8.0_152
+JAVA_HOME := /usr/local/jdk
+javac_opts := -g
 src_dir := ./src
 
 # test class
@@ -63,23 +64,17 @@ all: $(appclass) $(dll)
 .PHONY: .ONESHELL all appclass clean testclass testrun
 
 # --------------------------------------
-# class compilation
+# class compilation, JNI header creation
 # --------------------------------------
 $(release_dir)/%.class: $(src_dir)/%.java
-	@echo "Compiling class $@"
-	@$(JAVAC) -cp $(release_dir) -d $(release_dir) "$<"
-
-# --------------------------------------
-# JNI header creation
-# --------------------------------------
-$(header): $(appclass)
-	@echo "Creating header $@"
-	@$(JAVAH) -cp $(release_dir) -d $(include_dir) $(package_name).$(class_name)
+	@echo "Compiling class $@, plus JNI header file if applicable"
+	@$(JAVAC) $(javac_opts) -cp $(release_dir) \
+		-d $(release_dir) -h $(include_dir) "$<"
 
 # --------------------------------------
 # dll compilation
 # --------------------------------------
-$(dll): $(csrc_dir)/$(csrc_file) $(header)
+$(dll): $(csrc_dir)/$(csrc_file) $(appclass)
 	@echo "Compiling dll $@"
 	@$(CC) -I"$(JAVA_HOME)/include" -I"$(JAVA_HOME)/include/linux" \
 		-I"$(include_dir)" -fPIC -shared -o "$@" "$<"
@@ -92,7 +87,7 @@ appclass: $(appclass)
 # --------------------------------------
 # JLtest class compilation
 # --------------------------------------
-testclass: $(testclass)
+testclass: all $(testclass)
 
 # --------------------------------------
 # JLtest run
@@ -105,7 +100,7 @@ testrun:
 # --------------------------------------
 clean:
 	@echo "Deleting all targets and intermediate files"
-	-@$(RM) $(appclass) $(dll) $(header) $(testclass)
+	-@$(RM) $(appclass) $(dll) $(testclass) $(include_dir)/*
 
 # ------------------------------------------------------------------------------
 # EOF
