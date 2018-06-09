@@ -15,6 +15,9 @@ public class JLcall {
 	// hello()
 	public static native void hello();
 
+	// integerIsEven()
+	public static native boolean integerIsEven(int integer);
+
 	// load native library object
 	static {
 		System.loadLibrary("lcall");

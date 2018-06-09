@@ -13,6 +13,13 @@ class JLtest {
 		com.avalokita.jlcall.JLcall.hello();
 		backInJava();
 		
+		boolean isEven = true;
+		System.out.println("isEven = " + isEven);
+		aboutToCall("isEven = com.avalokita.jlcall.JLcall.integerIsEven(3)");
+		isEven = com.avalokita.jlcall.JLcall.integerIsEven(3);
+		backInJava();
+		System.out.println("isEven = " + isEven);
+		
 	}
 
 	private static void aboutToCall(String funcName) {
