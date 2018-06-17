@@ -18,6 +18,9 @@ public class JLcall {
 	// integerIsEven()
 	public static native boolean integerIsEven(int integer);
 
+	// alterIntArray()
+	public static native int alterIntArray(int intArray[]);
+
 	// load native library object
 	static {
 		System.loadLibrary("lcall");
