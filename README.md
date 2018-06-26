@@ -8,7 +8,7 @@ This is a personal self-teaching project on the topics of
 * GitHub
 * GNU Make
 
-As such, it does not aim to be ground-breaking in its material, strictly object-oriented in its design, or enterprise-level in its methods, but it is certainly a lot of fun for me.
+As such, it does not aim to be ground-breaking in its material, strictly object-oriented in its design, or enterprise-level in its rigour, but it is certainly a lot of fun for me.
 
 # Executables
 * JLcall.class - a collection of static native methods designed to invoke system calls. Not very object-oriented, unless you pretend that it is modelling "the set of system call functions".
@@ -21,17 +21,17 @@ As such, it does not aim to be ground-breaking in its material, strictly object-
 * JLtest.java - source for JLtest.class
 
 # Target systems
-Linux or other 'Nixy systems.
+Linux or other 'nixy systems.
 
 # Make syntax - includes a test run recipe
 ## make clean
-Deletes all targets and intermediate files. I recommend you execute this immediately after cloning, for a fresh start.
+Deletes targets, intermediate files and the directories they inhabited. I recommend you execute this immediately after cloning, for a fresh start.
 
 ## make all (default)
-Creates targets except JLtest
+Creates all targets except the JLtest class.
 
-## make tester
-Creates JLtest class. The JLcall class must exist as a prerequisite.
+## make testclass
+Creates everything in the 'all' target, plus the JLtest class.
 
 ## make testrun
 Executes JLtest, to prove the functionality of the JLcall class.
